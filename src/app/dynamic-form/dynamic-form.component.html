@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of objectKeys(formData)">
+      <div [ngSwitch]="formData[field].type">
+        <div *ngSwitchCase="'text'">
+          <label>{{ field }}</label>
+          <input type="text" [formControlName]="field">
+        </div>
+        <div *ngSwitchCase="'number'">
+          <label>{{ field }}</label>
+          <input type="number" [formControlName]="field">
+        </div>
+        <div *ngSwitchCase="'select'">
+          <label>{{ field }}</label>
+          <select [formControlName]="field">
+            <option *ngFor="let option of formData[field].options" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
